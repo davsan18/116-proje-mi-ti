@@ -5,7 +5,7 @@ class Game {
     public static void start(Player[] p,String b) {
         System.out.println("-----GAME START-----");
         Scanner s = new Scanner(System.in);
-        ArrayList<Card> deck = Card.cutDeck(Card.shuffleDeck(Card.createDeck(a)),s);
+        ArrayList<Card> deck = Card.cutDeck(Card.shuffleDeck(Card.createDeck(b)),s);
         ArrayList<Card> ground = new ArrayList<Card>();
         int a = 0;
         while (true) {
