@@ -2,10 +2,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Game {
-    public static void start(Player[] p) {
+    public static void start(Player[] p,String b) {
         System.out.println("-----GAME START-----");
         Scanner s = new Scanner(System.in);
-        ArrayList<Card> deck = Card.cutDeck(Card.shuffleDeck(Card.createDeck()),s);
+        ArrayList<Card> deck = Card.cutDeck(Card.shuffleDeck(Card.createDeck(a)),s);
         ArrayList<Card> ground = new ArrayList<Card>();
         int a = 0;
         while (true) {

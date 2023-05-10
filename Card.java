@@ -22,7 +22,7 @@ public class Card {
     public String getFace() {return face;}
     public int getValue() {return value;}
 
-    public static ArrayList<Card> createDeck() {
+    public static ArrayList<Card> createDeck(String s) {
         ArrayList<Card> cards = new ArrayList<Card>();
         int h = 0;
         int k = 1;
@@ -44,7 +44,8 @@ public class Card {
             h++;
         }            
         try {
-            Scanner input = new Scanner(Paths.get(null));
+            Scanner input = new Scanner(Paths.get(s));
+            
         }
         catch (IOException exception) {
             System.out.println("error");
