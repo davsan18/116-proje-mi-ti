@@ -9,14 +9,14 @@ public abstract class Player {
         hand = new ArrayList<Card>();
         points = 0;
     }
-    public boolean hasCards() {
-        return !hand.isEmpty();
+    public boolean isEmpty() {
+        return hand.isEmpty();
     }
     public Card playCard() {
         return null;
     }
-    public void getCards(ArrayList<Card> deck) {
-        for (int i=0;i<=4;i++) {
+    public void getCards(ArrayList<Card> deck,int x) {
+        for (int i=0;i<=x-1;i++) {
             hand.add(deck.get(deck.size()));
         }
     }

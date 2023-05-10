@@ -1,18 +1,30 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 class Game {
     public static void start(Player[] p) {
         System.out.println("-----GAME START-----");
-        ArrayList<Card> deck = new ArrayList<Card>();
+        Scanner s = new Scanner(System.in);
+        ArrayList<Card> deck = Card.cutDeck(Card.shuffleDeck(Card.createDeck()),s);
         ArrayList<Card> ground = new ArrayList<Card>();
         int a = 0;
-        while (!deck.isEmpty()) {
-            if (!p[a].hasCards()) {
-                p[a].getCards(deck);
+        while (true) {
+            if (p[a].isEmpty()) {
+                p[a].getCards(deck,4);
+
             }
             ground.add(p[a].playCard());
+            if (ground.get(ground.size())==ground.get(ground.size()-1)) {
+                for (Card x:ground) {
+                    p[a].getPoints(x.getValue());
+                    ground.clear();
+                }
+            }
             if (a==3) a=0;
             else a++;
+            if (deck.isEmpty()) {
+                break;
+            }
         }
     }
 }

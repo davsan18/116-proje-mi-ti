@@ -7,14 +7,21 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Card {
+
     private int number;
     private String face;
     private int value;
+
     public Card(int number,String face,int value) {
         this.number =number;
         this.face = face;
         this.value = value;
     }
+
+    public int getNumber() {return number;}
+    public String getFace() {return face;}
+    public int getValue() {return value;}
+
     public static ArrayList<Card> createDeck() {
         ArrayList<Card> cards = new ArrayList<Card>();
         int h = 0;
@@ -44,6 +51,7 @@ public class Card {
         }
         return cards;
     }
+
     public static ArrayList<Card> cutDeck(ArrayList<Card> x,Scanner s) {
         int b=-1;
         String a;
@@ -74,6 +82,7 @@ public class Card {
         }
         return (y);
     }
+
     public static ArrayList<Card> shuffleDeck(ArrayList<Card> c) {
         Collections.shuffle(c);
         return c;
