@@ -17,7 +17,7 @@ public class Card {
         this.face = face;
         this.value = value;
     }
-
+    public void setValue(int g) {value=g;}
     public int getNumber() {return number;}
     public String getFace() {return face;}
     public int getValue() {return value;}
@@ -34,31 +34,71 @@ public class Card {
         int k = 1;
         for(int i = 0;i<=51;i++) {
             if (h==0) {
-                cards.add(new Card(k,"s",1));
+                cards.add(new Card(k,"S",1));
             }
             if (h==1) {
-                cards.add( new Card(k,"c",1));
+                cards.add( new Card(k,"C",1));
             }
             if (h==2) {
-                cards.add(new Card(k,"h",1));
+                cards.add(new Card(k,"H",1));
             }
             if (h==3) {
-                cards.add(new Card(k,"d",1));
+                cards.add(new Card(k,"D",1));
                 h=-1;
                 k++;
             }
             h++;
         }
-        /**    try {
+        try {
             Scanner values = new Scanner(Paths.get(s));
-            String t;
-            while (true) {
-                t = values.nextLine();
+            String[] t;
+            while (values.hasNextLine()) {
+                t = values.nextLine().split(" ");
+                if (t[0]=="*") {
+                    for (int i=0;i<=3;i++) {
+                        cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"S",1)),new Card(Integer.parseInt(t[1]),"S",Integer.parseInt(t[2])));
+                        cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"C",1)),new Card(Integer.parseInt(t[1]),"C",Integer.parseInt(t[2])));
+                        cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"H",1)),new Card(Integer.parseInt(t[1]),"H",Integer.parseInt(t[2])));
+                        cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"D",1)),new Card(Integer.parseInt(t[1]),"D",Integer.parseInt(t[2])));
+                    }
+                }
+                else if (t[0]=="S") {
+                    if (t[1]=="*") {
+                        for (int i=0;i<=13;i++) {
+                            cards.set(cards.indexOf(new Card(i,"S",1)),new Card(i,"S",Integer.parseInt(t[2])));
+                        }
+                    }
+                    else cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),t[0],1)),new Card(Integer.parseInt(t[1]),t[0],Integer.parseInt(t[2])));
+                }
+                else if (t[0]=="C") {
+                    if (t[1]=="*") {
+                        for (int i=0;i<=13;i++) {
+                            cards.set(cards.indexOf(new Card(i,"C",1)),new Card(i,"C",Integer.parseInt(t[2])));
+                        }
+                    }
+                    else cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),t[0],1)),new Card(Integer.parseInt(t[1]),t[0],Integer.parseInt(t[2])));
+                }
+                else if (t[0]=="H") {
+                    if (t[1]=="*") {
+                        for (int i=0;i<=13;i++) {
+                            cards.set(cards.indexOf(new Card(i,"H",1)),new Card(i,"H",Integer.parseInt(t[2])));
+                        }
+                    }
+                    else cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),t[0],1)),new Card(Integer.parseInt(t[1]),t[0],Integer.parseInt(t[2])));
+                }
+                else if (t[0]=="D") {
+                    if (t[1]=="*") {
+                        for (int i=0;i<=13;i++) {
+                            cards.set(cards.indexOf(new Card(i,"D",1)),new Card(i,"D",Integer.parseInt(t[2])));
+                        }
+                    }
+                    else cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),t[0],1)),new Card(Integer.parseInt(t[1]),t[0],Integer.parseInt(t[2])));
+                }
             }
         }
         catch (IOException exception) {
-            System.out.println("error");
-        } */
+            System.out.println("error coudnt get file");
+        }
         return cards;
     }
 
