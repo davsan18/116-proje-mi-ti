@@ -22,7 +22,10 @@ public class Card {
     public String getFace() {return face;}
     public int getValue() {return value;}
     public String getInfo() {
-        return number+face;
+        if (number==11) return "J"+face;
+        if (number==12) return "Q"+face;
+        if (number==13) return "K"+face;
+        else return number+face;
     }
 
     public static ArrayList<Card> createDeck(String s) {

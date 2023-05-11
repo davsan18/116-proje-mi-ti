@@ -1,4 +1,6 @@
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Player {
@@ -33,18 +35,28 @@ public class Player {
             System.out.print(c.getInfo()+" ");
         }
         System.out.println();
-        if (hand[0]!=null)System.out.print(hand[0].getInfo()+" ");
-        else System.out.print("   ");
-        if (hand[1]!=null)System.out.print(hand[1].getInfo()+" ");
-        else System.out.print("   ");
-        if (hand[2]!=null)System.out.print(hand[2].getInfo()+" ");
-        else System.out.print("   ");
-        if (hand[3]!=null)System.out.println(hand[3].getInfo());
-        else System.out.println("   ");
-        int a = s.nextInt();
-        Card b = hand[a];
-        hand[a]=null;
-        return b;
+        for (Card c:hand) {
+            if (c!=null)System.out.print(c.getInfo()+" ");
+            else System.out.print("   ");
+        }
+        System.out.println("   ");
+        while (true) {
+            try {
+                int a = s.nextInt()-1;
+                if (a<=3&&0<=a) {
+                    if (hand[a]!=null) {
+                        Card b = hand[a];
+                        hand[a]=null;
+                        return b;
+                    }
+                    else System.out.println("that card has been played");
+                }
+                else System.out.println("wrong number");
+            }
+            catch (InputMismatchException t) {
+                System.out.println("wrong input");
+            }
+        }
     }
 
     public void getCards(ArrayList<Card> deck,int x) {

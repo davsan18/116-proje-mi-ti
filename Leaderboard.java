@@ -4,9 +4,10 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.Formatter;
 public class Leaderboard {
-    public String name;
-    public String points;
-    public String expertise;
+    private String name;
+    private String points;
+    private String expertise;
+    public Leaderboard() {}
     public Leaderboard(String x,String y,String z) {
         name = x;
         points = y;
@@ -49,7 +50,7 @@ public class Leaderboard {
             w = new FileWriter("leaderboard.txt", false);
             f = new Formatter(w);
             for (int i=0;i<=9;i++) {
-                f.format("%s:%s\n",x[i].getName(),x[i].getpoints());
+                f.format("%s:%s:%s\n",x[i].getName(),x[i].getpoints(),x[i].getExpertise());
             }
             w.close();
         }
@@ -60,7 +61,7 @@ public class Leaderboard {
     
     public static void points(String name,String points,String expertise) {
         Leaderboard[] top10 = new Leaderboard[11];
-        String[] x = new String[2];
+        String[] x = new String[3];
         Scanner z;
         int a = 0;
         try {
@@ -85,7 +86,7 @@ public class Leaderboard {
     private static Leaderboard[] sortIt(Leaderboard[] arr) {
         for (int i = 0; i < arr.length; i++) {  
             for (int j = i + 1; j < arr.length; j++) {
-                Leaderboard tmp = null;  
+                Leaderboard tmp = new Leaderboard();  
                 if (arr[i].points()<arr[j].points()) {  
                     tmp = arr[i];  
                     arr[i] = arr[j];  

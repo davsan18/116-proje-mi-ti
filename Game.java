@@ -2,22 +2,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Game {
-    public static void start(String b) {
-        Player[] players = new Player[4];
-        Player aaa = new Player("abc","low");
-        Player bbb = new Player("dsa","high");
-        Player ccc = new Player("fgh","easy");
-        Player ddd = new Player("qwe","hard");
-        players[0] = aaa;
-        players[1] = bbb;
-        players[2] = ccc;
-        players[3] = ddd;
+    public static void start(Player[] players,String b) {
         System.out.println("-----GAME START-----");
         Scanner s = new Scanner(System.in);
         ArrayList<Card> deck = Card.cutDeck(Card.shuffleDeck(Card.createDeck(b)),s);
         ArrayList<Card> ground = new ArrayList<Card>();
         int a = 0;
         while (true) {
+            System.out.println("["+players[0].getName()+":"+players[0].getPoints()+"/"+players[1].getName()+":"+players[1].getPoints()+"/"+players[2].getName()+":"+players[2].getPoints()+"/"+players[3].getName()+":"+players[3].getPoints()+"]");
             if (players[a].isEmpty()) {
                 players[a].getCards(deck,4);
                 for (int i=0;i<=3;i++) {
@@ -40,9 +32,8 @@ class Game {
                 
             }
         }
-        Leaderboard.points(players[0].getName(),String.valueOf(players[0].getPoints()),players[0].getExpertise());
-        Leaderboard.points(players[1].getName(),String.valueOf(players[1].getPoints()),players[1].getExpertise());
-        Leaderboard.points(players[2].getName(),String.valueOf(players[2].getPoints()),players[2].getExpertise());
-        Leaderboard.points(players[3].getName(),String.valueOf(players[3].getPoints()),players[3].getExpertise());
+        for (Player p:players) {
+            Leaderboard.points(p.getName(),String.valueOf(p.getPoints()),p.getExpertise());
+        }
     }
 }
