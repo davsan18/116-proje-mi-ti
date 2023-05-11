@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-public class Card {
+public class Card extends java.lang.Object {
 
     private int number;
     private String face;
@@ -14,6 +14,15 @@ public class Card {
         this.number =number;
         this.face = face;
         this.value = value;
+    }
+    @Override
+    public String toString() {
+        return number+face+value;
+    }
+    @Override
+    public boolean equals(Object c) {
+        if (this.toString().equals(c.toString())) return true;
+        else return false;
     }
     public void setValue(int g) {value=g;}
     public int getNumber() {return number;}
@@ -35,7 +44,7 @@ public class Card {
                 cards.add(new Card(k,"S",1));
             }
             if (h==1) {
-                cards.add( new Card(k,"C",1));
+                cards.add(new Card(k,"C",1));
             }
             if (h==2) {
                 cards.add(new Card(k,"H",1));
@@ -46,55 +55,80 @@ public class Card {
                 k++;
             }
             h++;
+            System.out.println(cards.get(cards.size()-1).getInfo());
         }
         try {
             Scanner values = new Scanner(Paths.get(s));
             String[] t = new String[3];
-            String[] c;
+            String[] c = new String[2];
             String[] p;
             while (values.hasNextLine()) {
                 p = values.nextLine().split(" ");
-                c = p[0].split("");
-                t[0] = c[0];
-                t[1] = c[1];
-                t[2] = p[1];
-                if (t[0]=="*") {
-                    cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"S",1)),new Card(Integer.parseInt(t[1]),"S",Integer.parseInt(t[2])));
-                    cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"C",1)),new Card(Integer.parseInt(t[1]),"C",Integer.parseInt(t[2])));
-                    cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"H",1)),new Card(Integer.parseInt(t[1]),"H",Integer.parseInt(t[2])));
-                    cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"D",1)),new Card(Integer.parseInt(t[1]),"D",Integer.parseInt(t[2])));
+                c[0] = p[0].substring(0, 1);
+                c[1] = p[0].substring(1, 2);
+                t[0] = c[0];//s
+                t[1] = c[1];//5
+                t[2] = p[1];//10
+                System.out.println(t[0]);
+                System.out.println(t[1]);
+                System.out.println(t[2]);
+                if (t[0].equals("*")) {
+                    try {cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"S",1)),new Card(Integer.parseInt(t[1]),"S",Integer.parseInt(t[2])));}
+                    catch (IndexOutOfBoundsException e) {}
+                    try {cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"C",1)),new Card(Integer.parseInt(t[1]),"C",Integer.parseInt(t[2])));}
+                    catch (IndexOutOfBoundsException e) {}
+                    try {cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"H",1)),new Card(Integer.parseInt(t[1]),"H",Integer.parseInt(t[2])));}
+                    catch (IndexOutOfBoundsException e) {}
+                    try {cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"D",1)),new Card(Integer.parseInt(t[1]),"D",Integer.parseInt(t[2])));}
+                    catch (IndexOutOfBoundsException e) {}
                 }
-                else if (t[0]=="S") {
+                else if (t[0].equals("S")) {
                     if (t[1]=="*") {
                         for (int i=1;i<=13;i++) {
-                            cards.set(cards.indexOf(new Card(i,"S",1)),new Card(i,"S",Integer.parseInt(t[2])));
+                            try {cards.set(cards.indexOf(new Card(i,"S",1)),new Card(i,"S",Integer.parseInt(t[2])));}
+                            catch (IndexOutOfBoundsException e) {}
                         }
                     }
-                    else cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),t[0],1)),new Card(Integer.parseInt(t[1]),t[0],Integer.parseInt(t[2])));
+                    else {
+                        try {cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),t[0],1)),new Card(Integer.parseInt(t[1]),t[0],Integer.parseInt(t[2])));}
+                        catch (IndexOutOfBoundsException e) {}
+                    }
                 }
-                else if (t[0]=="C") {
-                    if (t[1]=="*") {
-                        for (int i=0;i<=13;i++) {
-                            cards.set(cards.indexOf(new Card(i,"C",1)),new Card(i,"C",Integer.parseInt(t[2])));
+                else if (t[0].equals("C")) {
+                    if (t[1].equals("*")) {
+                        for (int i=1;i<=13;i++) {
+                            try {cards.set(cards.indexOf(new Card(i,"C",1)),new Card(i,"C",Integer.parseInt(t[2])));}
+                            catch (IndexOutOfBoundsException e) {}
                         }
                     }
-                    else cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),t[0],1)),new Card(Integer.parseInt(t[1]),t[0],Integer.parseInt(t[2])));
+                    else {
+                        try {cards.set(cards.indexOf(new Card(Integer.parseInt("+"+t[1]),t[0],1)),new Card(Integer.parseInt(t[1]),t[0],Integer.parseInt(t[2])));}
+                        catch (IndexOutOfBoundsException e) {}
+                    }
                 }
-                else if (t[0]=="H") {
-                    if (t[1]=="*") {
-                        for (int i=0;i<=13;i++) {
-                            cards.set(cards.indexOf(new Card(i,"H",1)),new Card(i,"H",Integer.parseInt(t[2])));
+                else if (t[0].equals("H")) {
+                    if (t[1].equals("*")) {
+                        for (int i=1;i<=13;i++) {
+                            try {cards.set(cards.indexOf(new Card(i,"H",1)),new Card(i,"H",Integer.parseInt(t[2])));}
+                            catch (IndexOutOfBoundsException e) {}
                         }
                     }
-                    else cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),t[0],1)),new Card(Integer.parseInt(t[1]),t[0],Integer.parseInt(t[2])));
+                    else {
+                        try {cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),t[0],1)),new Card(Integer.parseInt(t[1]),t[0],Integer.parseInt(t[2])));}
+                        catch (IndexOutOfBoundsException e) {}
+                    }
                 }
-                else if (t[0]=="D") {
-                    if (t[1]=="*") {
-                        for (int i=0;i<=13;i++) {
-                            cards.set(cards.indexOf(new Card(i,"D",1)),new Card(i,"D",Integer.parseInt(t[2])));
+                else if (t[0].equals("D")) {
+                    if (t[1].equals("*")) {
+                        for (int i=1;i<=13;i++) {
+                            try {cards.set(cards.indexOf(new Card(i,"D",1)),new Card(i,"D",Integer.parseInt(t[2])));}
+                            catch (IndexOutOfBoundsException e) {}
                         }
                     }
-                    else cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),t[0],1)),new Card(Integer.parseInt(t[1]),t[0],Integer.parseInt(t[2])));
+                    else {
+                        try {cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),t[0],1)),new Card(Integer.parseInt(t[1]),t[0],Integer.parseInt(t[2])));}
+                        catch (IndexOutOfBoundsException e) {}
+                    }
                 }
             }
         }
