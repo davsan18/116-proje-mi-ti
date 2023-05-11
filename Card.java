@@ -21,6 +21,9 @@ public class Card {
     public int getNumber() {return number;}
     public String getFace() {return face;}
     public int getValue() {return value;}
+    public String getInfo() {
+        return number+face;
+    }
 
     public static ArrayList<Card> createDeck(String s) {
         ArrayList<Card> cards = new ArrayList<Card>();
@@ -42,14 +45,17 @@ public class Card {
                 k++;
             }
             h++;
-        }            
-        try {
-            Scanner input = new Scanner(Paths.get(s));
-            
+        }
+        /**    try {
+            Scanner values = new Scanner(Paths.get(s));
+            String t;
+            while (true) {
+                t = values.nextLine();
+            }
         }
         catch (IOException exception) {
             System.out.println("error");
-        }
+        } */
         return cards;
     }
 
@@ -63,22 +69,22 @@ public class Card {
                 b = Integer.parseInt(a);
             }
             catch (Exception e) {
-                System.err.println("wrong input");
             }
             finally {
                 if (b<52&&b>0) {
                     break;
                 }
+                System.out.println("wrong number");
             }
         }
         s = null;
         ArrayList<Card> y = new ArrayList<Card>();
         for (int i = 0;i<=51;i++){
             if (b+i<=51) {
-                y.set(i,x.get(i+b));
+                y.add(x.get(i+b));
             }
             else {
-                y.set(i,x.get(i+b-52));
+                y.add(x.get(i+b-52));
             }
         }
         return (y);

@@ -6,9 +6,11 @@ import java.util.Formatter;
 public class Leaderboard {
     public String name;
     public String points;
-    public Leaderboard(String x,String y) {
+    public String expertise;
+    public Leaderboard(String x,String y,String z) {
         name = x;
         points = y;
+        expertise = z;
     }
 
     public String getName() {
@@ -17,6 +19,9 @@ public class Leaderboard {
 
     public String getpoints() {
         return points;
+    }
+    public String getExpertise() {
+        return expertise;
     }
 
     public int points() {
@@ -53,7 +58,7 @@ public class Leaderboard {
         }
     }
     
-    public static void points(String name,String points) {
+    public static void points(String name,String points,String expertise) {
         Leaderboard[] top10 = new Leaderboard[11];
         String[] x = new String[2];
         Scanner z;
@@ -62,17 +67,17 @@ public class Leaderboard {
             z = new Scanner(Paths.get("leaderboard.txt"));
             while (z.hasNextLine()) {
                 x = z.nextLine().split(":");
-                top10[a] = new Leaderboard(x[0],x[1]);
+                top10[a] = new Leaderboard(x[0],x[1],x[2]);
                 a++;
             }
         }
         catch (IOException e) {
             for (int i=0;i<=10;i++) {
-                top10[i] = new Leaderboard("empty","0");
+                top10[i] = new Leaderboard("empty","0","none");
             }
         }
         finally {
-            top10[10] = new Leaderboard(name, points);
+            top10[10] = new Leaderboard(name, points, expertise);
             writepoints(sortIt(top10));
         }
     }
