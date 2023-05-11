@@ -55,7 +55,6 @@ public class Card extends java.lang.Object {
                 k++;
             }
             h++;
-            System.out.println(cards.get(cards.size()-1).getInfo());
         }
         try {
             Scanner values = new Scanner(Paths.get(s));
@@ -69,9 +68,6 @@ public class Card extends java.lang.Object {
                 t[0] = c[0];//s
                 t[1] = c[1];//5
                 t[2] = p[1];//10
-                System.out.println(t[0]);
-                System.out.println(t[1]);
-                System.out.println(t[2]);
                 if (t[0].equals("*")) {
                     try {cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"S",1)),new Card(Integer.parseInt(t[1]),"S",Integer.parseInt(t[2])));}
                     catch (IndexOutOfBoundsException e) {}
