@@ -9,13 +9,26 @@ class Game {
         ArrayList<Card> ground = new ArrayList<Card>();
         int a = 0;
         while (true) {
-            System.out.println("["+players[0].getName()+":"+players[0].getPoints()+"/"+players[1].getName()+":"+players[1].getPoints()+"/"+players[2].getName()+":"+players[2].getPoints()+"/"+players[3].getName()+":"+players[3].getPoints()+"]");
-            if (players[a].isEmpty()) {
-                players[a].getCards(deck,4);
-                for (int i=0;i<=3;i++) {
-                    deck.remove(deck.size()-1);
+            if (players[3].isEmpty()) {
+                for (int u=0;u<=3;u++) {
+                    players[u].getCards(deck,4);
+                    for (int i=0;i<=3;i++) {
+                        deck.remove(deck.size()-1);
+                    }
                 }
             }
+            System.out.print("[");
+            for (int i=0;i<=3;i++) {
+                System.out.print("|"+players[i].getName()+":");
+                for (int j=0;j<=3;j++) {
+                    if (players[i].getCard(j)!=null) {
+                        System.out.print(players[i].getCard(j).getInfo());
+                    }
+                    if (j<3) System.out.print(" ");
+                }
+                System.out.print(": Score "+players[i].getPoints()+"|");
+            }
+            System.out.println("]");
             ground.add(players[a].playCard(ground,s));
             if (ground.size()>1) {
                 if (ground.get(ground.size()-1).getNumber()==ground.get(ground.size()-2).getNumber()) {

@@ -19,6 +19,7 @@ public class Player {
     public String getName() {return name;}
     public int getPoints() {return points;}
     public String getExpertise() {return expertise;}
+    public Card getCard(int i) {return hand[i];}
 
     public boolean isEmpty() {
         for (int i=0;i<=3;i++) {
