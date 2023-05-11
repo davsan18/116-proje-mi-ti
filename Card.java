@@ -2,8 +2,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Card {
@@ -51,20 +49,24 @@ public class Card {
         }
         try {
             Scanner values = new Scanner(Paths.get(s));
-            String[] t;
+            String[] t = new String[3];
+            String[] c;
+            String[] p;
             while (values.hasNextLine()) {
-                t = values.nextLine().split(" ");
+                p = values.nextLine().split(" ");
+                c = p[0].split("");
+                t[0] = c[0];
+                t[1] = c[1];
+                t[2] = p[1];
                 if (t[0]=="*") {
-                    for (int i=0;i<=3;i++) {
-                        cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"S",1)),new Card(Integer.parseInt(t[1]),"S",Integer.parseInt(t[2])));
-                        cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"C",1)),new Card(Integer.parseInt(t[1]),"C",Integer.parseInt(t[2])));
-                        cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"H",1)),new Card(Integer.parseInt(t[1]),"H",Integer.parseInt(t[2])));
-                        cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"D",1)),new Card(Integer.parseInt(t[1]),"D",Integer.parseInt(t[2])));
-                    }
+                    cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"S",1)),new Card(Integer.parseInt(t[1]),"S",Integer.parseInt(t[2])));
+                    cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"C",1)),new Card(Integer.parseInt(t[1]),"C",Integer.parseInt(t[2])));
+                    cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"H",1)),new Card(Integer.parseInt(t[1]),"H",Integer.parseInt(t[2])));
+                    cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"D",1)),new Card(Integer.parseInt(t[1]),"D",Integer.parseInt(t[2])));
                 }
                 else if (t[0]=="S") {
                     if (t[1]=="*") {
-                        for (int i=0;i<=13;i++) {
+                        for (int i=1;i<=13;i++) {
                             cards.set(cards.indexOf(new Card(i,"S",1)),new Card(i,"S",Integer.parseInt(t[2])));
                         }
                     }

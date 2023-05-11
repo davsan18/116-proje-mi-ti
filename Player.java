@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -43,7 +42,8 @@ public class Player {
         System.out.println("   ");
         while (true) {
             try {
-                int a = s.nextInt()-1;
+                String c = s.next();
+                int a = Integer.valueOf(c)-1;
                 if (a<=3&&0<=a) {
                     if (hand[a]!=null) {
                         Card b = hand[a];
@@ -54,7 +54,7 @@ public class Player {
                 }
                 else System.out.println("wrong number");
             }
-            catch (InputMismatchException t) {
+            catch (NumberFormatException t) {
                 System.out.println("wrong input");
             }
         }

@@ -8,17 +8,24 @@ class Game {
         ArrayList<Card> deck = Card.cutDeck(Card.shuffleDeck(Card.createDeck(b)),s);
         ArrayList<Card> ground = new ArrayList<Card>();
         int a = 0;
+        int o = 1;
+        for (int y=1;y<=4;y++) {
+            ground.add(deck.get(deck.size()-y));
+        }
+        for (int y=1;y<=4;y++) {
+            deck.remove(deck.size()-1);
+        }
         while (true) {
-            if (players[3].isEmpty()) {
-                for (int u=0;u<=3;u++) {
+            if (players[players.length-1].isEmpty()) {
+                for (int u=0;u<=players.length-1;u++) {
                     players[u].getCards(deck,4);
                     for (int i=0;i<=3;i++) {
                         deck.remove(deck.size()-1);
                     }
                 }
             }
-            System.out.print("[");
-            for (int i=0;i<=3;i++) {
+            System.out.print("Round "+o+" [");
+            for (int i=0;i<=players.length-1;i++) {
                 System.out.print("|"+players[i].getName()+":");
                 for (int j=0;j<=3;j++) {
                     if (players[i].getCard(j)!=null) {
@@ -30,17 +37,29 @@ class Game {
             }
             System.out.println("]");
             ground.add(players[a].playCard(ground,s));
+            s.reset();
             if (ground.size()>1) {
-                if (ground.get(ground.size()-1).getNumber()==ground.get(ground.size()-2).getNumber()) {
+                if (ground.get(ground.size()-1).getNumber()==11) {
                     for (Card x:ground) {
                         players[a].getPoints(x.getValue());
                     }
                     ground.clear();
                 }
+                else if (ground.get(ground.size()-1).getNumber()==ground.get(ground.size()-2).getNumber()) {
+                    if (ground.size()==2) {
+                        players[a].getPoints(5*(ground.get(ground.size()-1).getNumber()+ground.get(ground.size()-2).getNumber()));
+                    }
+                    else {
+                        for (Card x:ground) {
+                            players[a].getPoints(x.getValue());
+                        }
+                    }
+                    ground.clear();
+                }
             }
-            if (a==3) a=0;
+            if (a==players.length-1) {a=0;o++;}
             else a++;
-            if (deck.isEmpty()) {
+            if (deck.isEmpty()&&players[players.length-1].isEmpty()) {
                 break;
                 
             }
