@@ -30,10 +30,12 @@ public class Player {
 
     public Card playCard(ArrayList<Card> cards,Scanner s) {
         System.out.println("--------------------");
+        System.out.print("ground = ");
         for (Card c:cards) {
             System.out.print(c.getInfo()+" ");
         }
         System.out.println();
+        System.out.print("Hand = ");
         for (Card c:hand) {
             if (c!=null)System.out.print(c.getInfo()+" ");
             else System.out.print("   ");
