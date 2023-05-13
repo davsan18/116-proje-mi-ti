@@ -7,65 +7,77 @@ class Game {
         Scanner s = new Scanner(System.in);
         ArrayList<Card> deck = Card.cutDeck(Card.shuffleDeck(Card.createDeck(b)),s);
         ArrayList<Card> ground = new ArrayList<Card>();
-        int a = 0;
-        int o = 1;
+        String[] logs = new String[4];
+        int pointHolder=0;
         for (int y=1;y<=4;y++) {
-            ground.add(deck.get(deck.size()-y));
-        }
-        for (int y=1;y<=4;y++) {
+            ground.add(deck.get(deck.size()-1));
             deck.remove(deck.size()-1);
         }
-        while (true) {
-            if (players[players.length-1].isEmpty()) {
-                for (int u=0;u<=players.length-1;u++) {
-                    players[u].getCards(deck,4);
-                    for (int i=0;i<=3;i++) {
-                        deck.remove(deck.size()-1);
-                    }
+        for (int i=1;deck.size()>0;i++) {
+            for (Player p:players) {
+                p.getCards(deck, 4);
+                for (int q=0;q<=4;q++) {
+                    deck.remove(deck.size()-1);
                 }
             }
-            System.out.print("Round "+o+" [");
-            for (int i=0;i<=players.length-1;i++) {
-                System.out.print("|"+players[i].getName()+":");
-                for (int j=0;j<=3;j++) {
-                    if (players[i].getCard(j)!=null) {
-                        System.out.print(players[i].getCard(j).getInfo());
-                    }
-                    if (j<3) System.out.print(" ");
-                }
-                System.out.print(": Score "+players[i].getPoints()+"|");
-            }
-            System.out.println("]");
-            ground.add(players[a].playCard(ground,s));
-            s.reset();
-            if (ground.size()>1) {
-                if (ground.get(ground.size()-1).getNumber()==11) {
-                    for (Card x:ground) {
-                        players[a].getPoints(x.getValue());
-                    }
-                    ground.clear();
-                }
-                else if (ground.get(ground.size()-1).getNumber()==ground.get(ground.size()-2).getNumber()) {
-                    if (ground.size()==2) {
-                        players[a].getPoints(5*(ground.get(ground.size()-1).getNumber()+ground.get(ground.size()-2).getNumber()));
-                    }
-                    else {
-                        for (Card x:ground) {
-                            players[a].getPoints(x.getValue());
+            for (int j=0;j<=3;j++) {
+                logs[j]="";
+                for (Player p:players) {
+                    pointHolder=0;
+                    ground.add(p.playCard(ground,s));
+                    logs[j]+=(ground.get(ground.size()-1).getInfo());
+                    if (ground.size()>1) {
+                        if (same(ground)) {
+                            for (Card c:ground) {pointHolder+=c.getValue();}
+                            if (mişti(ground)) {
+                                pointHolder*=5;
+                            }
+                            p.getPoints(pointHolder);
+                            ground.clear();
+                            logs[j]+="! ";
                         }
+                        else if (joker(ground)) {
+                            for (Card c:ground) {pointHolder+=c.getValue();}
+                            p.getPoints(pointHolder);
+                            ground.clear();
+                            logs[j]+="! ";
+                        }
+                        else {logs[j]+=" ";}
                     }
-                    ground.clear();
+                    else {logs[j]+=" ";}
                 }
             }
-            if (a==players.length-1) {a=0;o++;}
-            else a++;
-            if (deck.isEmpty()&&players[players.length-1].isEmpty()) {
-                break;
-                
+            System.out.print("Hand "+i);
+            for (Player p:players) {
+                System.out.print(":"+p.getInfo());
+            }
+            System.out.println();
+            System.out.println();
+            for (int g=0;g<=3;g++) {
+                System.out.println(g+1+"."+logs[g]);
             }
         }
         for (Player p:players) {
             Leaderboard.points(p.getName(),String.valueOf(p.getPoints()),p.getExpertise());
         }
+    }
+
+    private static boolean same(ArrayList<Card> ground) {
+        if (ground.get(ground.size()-1).getNumber()==ground.get(ground.size()-2).getNumber()) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean joker(ArrayList<Card> ground) {
+        if (ground.get(ground.size()-1).getNumber()==11) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean mişti(ArrayList<Card> ground) {
+        if (ground.size()==2) {return true;}
+        return false;
     }
 }

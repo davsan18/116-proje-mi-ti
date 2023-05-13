@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Player {
     private String name;
     private Card[] hand;
+    private boolean[] handUsed;
     private int points;
     private String expertise;
 
@@ -11,6 +12,7 @@ public class Player {
         this.name = name;
         this.expertise = expertise;
         hand = new Card[4];
+        handUsed = new boolean[4];
         points = 0;
     }
 
@@ -21,7 +23,7 @@ public class Player {
 
     public boolean isEmpty() {
         for (int i=0;i<=3;i++) {
-            if  (hand[i]!=null) {
+            if  (handUsed[i]!=true) {
                 return false;
             }
         }
@@ -29,15 +31,15 @@ public class Player {
     }
 
     public Card playCard(ArrayList<Card> cards,Scanner s) {
-        System.out.println("--------------------");
+        System.out.println("");
         System.out.print("ground = ");
         for (Card c:cards) {
             System.out.print(c.getInfo()+" ");
         }
         System.out.println();
         System.out.print("Hand = ");
-        for (Card c:hand) {
-            if (c!=null)System.out.print(c.getInfo()+" ");
+        for (int m=0;m<=3;m++) {
+            if (!handUsed[m])System.out.print(hand[m].getInfo()+" ");
             else System.out.print("   ");
         }
         System.out.println("   ");
@@ -46,10 +48,9 @@ public class Player {
                 String c = s.next();
                 int a = Integer.valueOf(c)-1;
                 if (a<=3&&0<=a) {
-                    if (hand[a]!=null) {
-                        Card b = hand[a];
-                        hand[a]=null;
-                        return b;
+                    if (!handUsed[a]) {
+                        handUsed[a]=true;
+                        return hand[a];
                     }
                     else System.out.println("that card has been played");
                 }
@@ -69,5 +70,9 @@ public class Player {
 
     public void getPoints(int p) {
         points += p;
+    }
+
+    public String getInfo() {
+        return name+": {"+this.getCard(0).getInfo()+" "+this.getCard(1).getInfo()+" "+this.getCard(2).getInfo()+" "+this.getCard(3).getInfo()+"} Score "+this.getPoints();
     }
 }
