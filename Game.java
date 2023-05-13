@@ -12,17 +12,21 @@ class Game {
         String[] logs = new String[4];
         ArrayList<Card> cardsPlayed = new ArrayList<Card>();
         int pointHolder=0;
+        System.out.println("deck size ="+deck.size());
         for (int y=1;y<=4;y++) {
             ground.add(deck.get(deck.size()-1));
+            cardsPlayed.add(deck.get(deck.size()-1));
             deck.remove(deck.size()-1);
         }
-        for (int i=1;deck.size()>0;i++) {
+        System.out.println("deck size ="+deck.size());
+        for (int i=1;cardsPlayed.size()<52;i++) {
             for (Player p:players) {
-                p.getCards(deck, 4);
-                for (int q=0;q<=4;q++) {
+                p.getCards(deck);
+                for (int q=0;q<=3;q++) {
                     deck.remove(deck.size()-1);
                 }
             }
+            System.out.println("deck size ="+deck.size());
             for (int j=0;j<=3;j++) {
                 logs[j]="";
                 for (Player p:players) {

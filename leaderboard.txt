@@ -1,6 +1,6 @@
-empty:0:none
-empty:0:none
-empty:0:none
+player4:25:expert
+player3:14:regular
+player2:3:novice
 empty:0:none
 empty:0:none
 empty:0:none

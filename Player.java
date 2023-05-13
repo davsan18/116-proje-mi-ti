@@ -33,9 +33,9 @@ public abstract class Player {
 
     abstract public Card playCard(ArrayList<Card> cards,ArrayList<Card> cardsPlayed,Scanner s,Random r);
 
-    public void getCards(ArrayList<Card> deck,int x) {
-        for (int i=0;i<x;i++) {
-            hand[i]=(deck.get(deck.size()-i-1));
+    public void getCards(ArrayList<Card> deck) {
+        for (int i=0;i<=3;i++) {
+            hand[i]=(deck.get(deck.size()-(i+1)));
             handUsed[i]=false;
         }
     }
