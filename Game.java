@@ -1,13 +1,16 @@
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 class Game {
     public static void start(Player[] players,String b) {
         System.out.println("-----GAME START-----");
         Scanner s = new Scanner(System.in);
+        Random r = new Random();
         ArrayList<Card> deck = Card.cutDeck(Card.shuffleDeck(Card.createDeck(b)),s);
         ArrayList<Card> ground = new ArrayList<Card>();
         String[] logs = new String[4];
+        ArrayList<Card> cardsPlayed = new ArrayList<Card>();
         int pointHolder=0;
         for (int y=1;y<=4;y++) {
             ground.add(deck.get(deck.size()-1));
@@ -24,7 +27,8 @@ class Game {
                 logs[j]="";
                 for (Player p:players) {
                     pointHolder=0;
-                    ground.add(p.playCard(ground,s));
+                    ground.add(p.playCard(ground,cardsPlayed,s,r));
+                    cardsPlayed.add(ground.get(ground.size()-1));
                     logs[j]+=(ground.get(ground.size()-1).getInfo());
                     if (ground.size()>1) {
                         if (same(ground)) {

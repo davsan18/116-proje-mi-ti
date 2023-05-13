@@ -65,9 +65,9 @@ public class Card extends java.lang.Object {
                 p = values.nextLine().split(" ");
                 c[0] = p[0].substring(0, 1);
                 c[1] = p[0].substring(1, 2);
-                t[0] = c[0];//s
-                t[1] = c[1];//5
-                t[2] = p[1];//10
+                t[0] = c[0];
+                t[1] = c[1];
+                t[2] = p[1];
                 if (t[0].equals("*")) {
                     try {cards.set(cards.indexOf(new Card(Integer.parseInt(t[1]),"S",1)),new Card(Integer.parseInt(t[1]),"S",Integer.parseInt(t[2])));}
                     catch (IndexOutOfBoundsException e) {}
@@ -168,5 +168,8 @@ public class Card extends java.lang.Object {
     public static ArrayList<Card> shuffleDeck(ArrayList<Card> c) {
         Collections.shuffle(c);
         return c;
+    }
+    public boolean compare(Card x) {
+        
     }
 }
