@@ -23,7 +23,7 @@ public class Misti {
                 }
                 else {
                     if (i==0) {players[i]= new HumanPlayer(placeHolder[0], placeHolder[1]);}
-                    if (HasHuman(players)) {players[i]= new BotNovice(placeHolder[0], placeHolder[1]);}
+                    else if (HasHuman(players)) {players[i]= new BotNovice(placeHolder[0], placeHolder[1]);}
                     else {players[i]= new HumanPlayer(placeHolder[0], placeHolder[1]);}
                 }
             }

@@ -36,6 +36,7 @@ public abstract class Player {
     public void getCards(ArrayList<Card> deck,int x) {
         for (int i=0;i<x;i++) {
             hand[i]=(deck.get(deck.size()-i-1));
+            handUsed[i]=false;
         }
     }
 
