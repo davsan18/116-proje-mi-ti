@@ -19,7 +19,9 @@ class Game {
         for (int i=1;deck.size()>0;i++) {
             for (Player p:players) {
                 p.getCards(deck, 4);
-                deck.remove(deck.size()-1);
+                for (int q=0;q<=4;q++) {
+                    deck.remove(deck.size()-1);
+                }
             }
             for (int j=0;j<=3;j++) {
                 logs[j]="";
