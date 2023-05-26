@@ -17,12 +17,13 @@ public class BotRegular extends BotNovice {
                     for (Card c:cards) {points+=c.getValue();}
                     points+=hand[0].getValue();
                     if (points>0) {
+                        handUsed[h]=true;
                         return hand[h];
                     }
                 }
             }
         }
-        if (this.getExpertise()=="regular") {
+        if (this.getExpertise().compareTo("regular")==0) {
             return super.playCard(cards,cardsPlayed,s,r);
         }
         else return null;
