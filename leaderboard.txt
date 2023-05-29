@@ -1,10 +1,10 @@
 ahmet:217:regular
+ahmet:198:regular
 kemal:178:regular
 ahmet:172:regular
 ahmet:121:regular
+ali:107:novice
 ahmet:104:regular
 ali:101:novice
 ahmet:95:regular
 ahmet:94:regular
-player3:90:expert
-ahmet:90:regular
