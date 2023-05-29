@@ -31,7 +31,7 @@ class Game {
                     ground.add(p.playCard(ground,cardsPlayed,s,r));
                     cardsPlayed.add(ground.get(ground.size()-1));
                     logs[j]+=(ground.get(ground.size()-1).getInfo());
-                    if (ground.size()>1) {
+                    if (ground.size()>=2) {
                         if (same(ground)) {
                             for (Card c:ground) {pointHolder+=c.getValue();}
                             if (mişti(ground)) {

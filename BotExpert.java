@@ -29,12 +29,12 @@ public class BotExpert extends BotRegular {
             for (int i =0;i<4;i++) {
                 int yy=0;
                 if (!handUsed[i]) {
-                    arr[yy] = hand[i].getValue();
+                    arr[yy] = used[i];
                     yy++;
                 }
             }
-            int temp = 0;
-            for (int i = 0; i < arr.length; i++) {
+            int temp = arr[0];
+            for (int i = 1; i < arr.length; i++) {
 
                     
                     if (temp < arr[i]) {
@@ -43,12 +43,22 @@ public class BotExpert extends BotRegular {
 
                 }
             }
-            for (int i =0;i<hand.length-1;i++){
-                if(hand[i].getValue()==temp){
-                    handUsed[i]=true;
-                    x=hand[i];
+            for (int i =0;i<hand.length;i++){
+                if(used[i]==temp){
+                    if (!handUsed[i]) {
+                        handUsed[i]=true;
+                        x=hand[i];
+                        break;
+                    }
                 }
             }
+        }
+        int i=0;
+        for (Card v:hand) {
+            if (x.equals(v)) {
+                handUsed[i]=true;
+            }
+            i++;
         }
         return x;
     }

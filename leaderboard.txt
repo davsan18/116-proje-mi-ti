@@ -2,9 +2,9 @@ ahmet:217:regular
 ahmet:198:regular
 kemal:178:regular
 ahmet:172:regular
+kadir:136:expert
+kadir:123:expert
 ahmet:121:regular
 ali:107:novice
+aaa:105:regular
 ahmet:104:regular
-ali:101:novice
-ahmet:95:regular
-ahmet:94:regular
